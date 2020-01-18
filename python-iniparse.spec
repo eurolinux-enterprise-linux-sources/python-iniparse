@@ -2,7 +2,7 @@
 
 Name:           python-iniparse
 Version:        0.4
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        Python Module for Accessing and Modifying Configuration Data in INI files
 Group:          Development/Libraries
 License:        MIT
@@ -54,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.4-9
+- Mass rebuild 2013-12-27
+
 * Wed Jul 31 2013 Bohuslav Kabrda <bkabrda@redhat.com> - 0.4-8
 - fix tests not to fail because of fix for upstream issue 28
 
