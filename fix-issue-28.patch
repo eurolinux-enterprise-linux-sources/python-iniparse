@@ -1,0 +1,32 @@
+From 68843c1f3dd21a06aa2dc3637a4ffa40f6d572a8 Mon Sep 17 00:00:00 2001
+From: Tim Lauridsen <timlau@fedoraproject.org>
+Date: Sun, 9 Sep 2012 16:10:17 +0200
+Subject: [PATCH] fix for option begining with rem is removed (upstream issue
+ #28)
+
+--
+diff --git a/iniparse/ini.py b/iniparse/ini.py
+index 408354d..68dd65c 100644
+--- a/iniparse/ini.py
++++ b/iniparse/ini.py
+@@ -171,7 +171,7 @@ def change_comment_syntax(comment_chars='%;#', allow_rem=False):
+     CommentLine.regex = re.compile(regex)
+ 
+ class CommentLine(LineType):
+-    regex = re.compile(r'^(?P<csep>[;#]|[rR][eE][mM])'
++    regex = re.compile(r'^(?P<csep>[;#]|[rR][eE][mM] +)'
+                        r'(?P<comment>.*)$')
+ 
+     def __init__(self, comment='', separator='#', line=None):
+--- a/tests/test_ini.py.orig	2013-07-31 13:16:19.944347042 +0200
++++ b/tests/test_ini.py	2013-07-31 13:16:35.806330262 +0200
+@@ -145,7 +145,6 @@
+         ';; this is also a comment',
+         '; so is this   ',
+         'Rem and this',
+-        'remthis too!'
+     ]
+     def test_parsing(self):
+         for l in self.lines:
+-- 
+1.7.11.4
